@@ -39,6 +39,9 @@ jobs:
       - name: Check Out Repo 
         uses: actions/checkout@v2
 
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
+
       - name: Set context
         uses: azure/k8s-set-context@v2
         with:
