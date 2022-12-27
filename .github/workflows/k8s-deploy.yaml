@@ -26,7 +26,7 @@ jobs:
           context: ./
           file: ./docker/Dockerfile
           push: true
-          tags: sdukshis/otus_cicd:${{ env.GITHUB_REF_NAME }}
+          tags: sdukshis/otus_cicd:${{ event.run_id }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -52,7 +52,8 @@ jobs:
       - name: Deploy k8s
         uses: jtalk/k8s-deploy@v2
         with:
-          namespace: "${{ env.GITHUB_REF_NAME }}"
+          namespace: '${{ env.GITHUB_REF_NAME }}'
+          images: 'sdukshis/otus_cicd:${{ event.run_id }}'
           manifests: |
               k8s/otus.yml
           kubectl-version: 'latest'
