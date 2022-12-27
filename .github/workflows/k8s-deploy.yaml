@@ -36,6 +36,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
       - name: Set context
         uses: azure/k8s-set-context@v2
         with:
