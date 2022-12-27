@@ -1,5 +1,7 @@
 name: K8s deploy
 
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
