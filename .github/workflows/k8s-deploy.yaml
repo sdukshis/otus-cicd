@@ -42,6 +42,10 @@ jobs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
 
+      - name: Replace ingress URL
+        run: |
+          sed -i 's/host: main.otus-mlops/host: ${{ env.GITHUB_REF_NAME }}.otus-mlops/g' k8s/otus.yml
+
       - name: Set context
         uses: azure/k8s-set-context@v2
         with:
@@ -57,3 +61,8 @@ jobs:
           manifests: |
               k8s/otus.yml
           kubectl-version: 'latest'
+
+      - name: Print deployemnt URL
+        run: |
+          echo "Open http://${{ env.GITHUB_REF_NAME }}.otus-mlops.filonovpv.name"
+
