@@ -45,6 +45,7 @@ jobs:
       - name: Replace ingress URL
         run: |
           sed -i 's/host: main.otus-mlops/host: ${{ env.GITHUB_REF_NAME }}.otus-mlops/g' k8s/otus.yml
+          sed -i 's/name: default/name: ${{ env.GITHUB_REF_NAME }}/g' k8s/otus.yml
 
       - name: Set context
         uses: azure/k8s-set-context@v2
