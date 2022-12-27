@@ -30,3 +30,23 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set context
+        uses: azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          context: default
+    
+      - name: Deploy k8s
+        uses: jtalk/k8s-deploy@v2
+        with:
+          namespace: ${{ env.GITHUB_REF_NAME }}
+          manifests: |
+              k8s/otus.yaml
+          kubectl-version: 'latest'
