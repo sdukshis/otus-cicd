@@ -48,5 +48,5 @@ jobs:
         with:
           namespace: ${{ env.GITHUB_REF_NAME }}
           manifests: |
-              k8s/otus.yaml
+              k8s/otus.yml
           kubectl-version: 'latest'
