@@ -27,7 +27,7 @@ jobs:
           context: ./
           file: ./docker/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/otus_cicd:${{ GITHUB_REF_NAME }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/otus_cicd:${{ env.GITHUB_REF_NAME }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
